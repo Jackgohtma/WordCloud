@@ -1,0 +1,12 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "AZURE_STORAGE_CONNECTION_STRING": "UseDevelopmentStorage=true",
+    "AZURE_TABLE_NAME": "TribeResponses",
+    "EVENT_PARTITION_KEY": "TMA-TRIBE-2026",
+    "FORMS_INTAKE_SECRET": "replace-with-a-long-random-secret",
+    "REPORT_ACCESS_CODE": "replace-with-a-different-strong-code"
+  }
+}

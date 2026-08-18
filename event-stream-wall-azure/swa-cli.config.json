@@ -1,0 +1,10 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "tma-tribe-2026": {
+      "appLocation": "frontend",
+      "apiLocation": "api",
+      "outputLocation": "."
+    }
+  }
+}

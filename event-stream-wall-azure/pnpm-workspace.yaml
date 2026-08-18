@@ -1,0 +1,6 @@
+packages:
+  - api
+
+allowBuilds:
+  esbuild: true
+  keytar: false
