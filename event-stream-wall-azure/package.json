@@ -2,7 +2,6 @@
   "name": "tma-tribe-2026-azure",
   "version": "1.0.0",
   "private": true,
-  "workspaces": ["api"],
   "scripts": {
     "install:api": "npm --prefix api install",
     "start": "swa start frontend --api-location api",
