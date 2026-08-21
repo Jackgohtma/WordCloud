@@ -1,0 +1,10 @@
+node_modules/
+api/node_modules/
+api/local.settings.json
+.env
+.swa/
+.azurite/
+*.log
+.DS_Store
+
+.pnpm-store/

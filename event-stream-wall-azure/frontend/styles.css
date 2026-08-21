@@ -14,7 +14,7 @@ p{margin:0}
 .cloud-stage{min-height:0;display:flex;flex-direction:column;padding:30px}
 .stage-kicker,.chat-eyebrow,.dialog-header span{font-size:11px;font-weight:850;letter-spacing:.18em;color:#8fa0b7}
 .phrase-cloud{flex:1;display:flex;align-content:center;align-items:center;justify-content:center;flex-wrap:wrap;gap:20px 28px;padding:30px 3%;overflow:hidden}
-.cloud-phrase{line-height:1.02;text-align:center;text-wrap:balance;text-shadow:0 3px 24px currentColor;animation:pop-in .5s both;max-width:48%}
+.cloud-phrase{line-height:1.02;text-align:center;text-wrap:balance;text-shadow:0 3px 24px currentColor;max-width:48%}
 .empty-cloud{color:#64748b}
 .ticker{display:flex;align-items:center;gap:14px;padding:13px 28px;border-top:1px solid rgba(255,255,255,.09);color:#96a4b8;font-size:12px;letter-spacing:.03em}
 .ticker-label{color:#07100a;background:#b7ff3c;border-radius:4px;padding:3px 7px;font-weight:900}
@@ -22,7 +22,7 @@ p{margin:0}
 .chat-header h1{margin:3px 0 0;font-size:24px}
 .signal{color:#b7ff3c}
 .chat-feed{overflow:auto;padding:11px 17px;scrollbar-width:thin}
-.chat-message{display:flex;gap:11px;padding:12px 9px;border:1px solid rgba(244,114,182,.1);border-radius:10px;background:rgba(126,34,206,.055);animation:slide-in .45s both}
+.chat-message{display:flex;gap:11px;padding:12px 9px;border:1px solid rgba(244,114,182,.1);border-radius:10px;background:rgba(126,34,206,.055)}
 .avatar{flex:0 0 34px;height:34px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,rgba(168,85,247,.28),rgba(236,72,153,.15));color:#f9a8d4;font-weight:900}
 .message-content{min-width:0}
 .message-meta{display:flex;align-items:center;gap:8px;margin-bottom:5px}
@@ -124,3 +124,35 @@ html,body{width:100%;height:100%;overflow:hidden}
 .access-card p{min-height:20px;margin:0;color:#6d42d8;font-size:13px}
 .report-actions{align-items:center;justify-content:space-between}
 .report-actions span{color:#657083;font-size:13px}
+
+/* Live wall controls and stable incremental updates */
+.header-actions{display:flex;align-items:center;gap:10px}
+.manual-entry-button{border:1px solid rgba(183,255,60,.28);background:rgba(183,255,60,.08);color:#b7ff3c;padding:7px 11px;font-size:10px;letter-spacing:.06em}
+.ticker{color:#dbe4ef}
+.ticker strong{font-weight:850}
+.chat-panel{grid-template-rows:auto auto minmax(0,1fr)}
+.pinned-feed{display:flex;flex-direction:column;gap:7px;max-height:29vh;overflow-y:auto;padding:10px 17px;border-bottom:1px solid rgba(244,114,182,.22);background:rgba(236,72,153,.06)}
+.pinned-feed[hidden]{display:none}
+.pinned-feed::before{content:"PINNED";position:sticky;top:0;z-index:2;align-self:flex-start;padding:3px 6px;border-radius:4px;background:#f472b6;color:#29101e;font-size:8px;font-weight:950;letter-spacing:.13em}
+.chat-feed{justify-content:flex-start}
+.chat-message{position:relative;flex:0 0 auto}
+.chat-message.is-pinned{border-color:rgba(244,114,182,.34);background:rgba(236,72,153,.11)}
+.message-content{padding-right:25px}
+.comment-menu-button{position:absolute;top:5px;right:6px;z-index:3;width:27px;height:25px;padding:0;border:1px solid rgba(255,255,255,.13);background:#24172e;color:#f1d8ef;font-size:18px;line-height:1;opacity:0;transition:opacity .15s ease}
+.chat-message:hover .comment-menu-button,.chat-message:focus-within .comment-menu-button{opacity:1}
+.comment-menu{position:absolute;top:31px;right:7px;z-index:6;min-width:94px;padding:5px;border:1px solid rgba(255,255,255,.14);border-radius:8px;background:#211628;box-shadow:0 12px 28px rgba(0,0,0,.4)}
+.comment-menu[hidden]{display:none}
+.comment-menu button{display:block;width:100%;padding:7px 9px;border-radius:5px;background:transparent;color:#f5edf7;text-align:left;font-size:11px}
+.comment-menu button:hover{background:rgba(255,255,255,.08)}
+.comment-menu .delete-action{color:#ff9bb0}
+.word-new{animation:pop-in .5s both}
+.message-new{animation:slide-in .45s both}
+@keyframes vote-flash{50%{filter:brightness(1.9);opacity:.72}}
+.vote-bump:not(.cloud-anchor){animation:vote-flash .55s ease}
+.form-status{min-height:18px;margin-top:12px;color:#f9a8d4;font-size:12px}
+button:disabled{cursor:wait;opacity:.65}
+
+@media(max-width:850px){
+  .manual-entry-button{display:none}
+  .pinned-feed{max-height:16vh}
+}

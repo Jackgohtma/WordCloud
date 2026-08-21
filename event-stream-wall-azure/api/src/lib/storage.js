@@ -70,8 +70,31 @@ export async function listResponses() {
       aiWish: entity.aiWish || "",
       aiWishKey: entity.aiWishKey || normalizeWish(entity.aiWish || ""),
       feedback: entity.feedback || "",
+      pledgePinned: Boolean(entity.pledgePinned),
+      pledgePinnedAt: entity.pledgePinnedAt || "",
+      pledgeDeleted: Boolean(entity.pledgeDeleted),
       submittedAt: entity.submittedAt || entity.timestamp?.toISOString?.() || ""
     });
   }
   return rows.sort((a, b) => b.submittedAt.localeCompare(a.submittedAt));
+}
+
+export async function updatePledgeModeration(id, action) {
+  const client = await getTableClient();
+  const entity = { partitionKey, rowKey: id };
+  if (action === "pin") {
+    entity.pledgePinned = true;
+    entity.pledgePinnedAt = new Date().toISOString();
+    entity.pledgeDeleted = false;
+  } else if (action === "unpin") {
+    entity.pledgePinned = false;
+    entity.pledgePinnedAt = "";
+  } else if (action === "delete") {
+    entity.pledgeDeleted = true;
+    entity.pledgePinned = false;
+    entity.pledgePinnedAt = "";
+  } else {
+    throw new Error("Unsupported moderation action.");
+  }
+  await client.updateEntity(entity, "Merge");
 }

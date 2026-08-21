@@ -3,25 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TMA Tribe 2026 — Private Report</title>
+  <title>TMA Tribe 2026 — Event Report</title>
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body class="report-page">
   <main class="tool-screen">
     <section class="report-shell">
-      <p class="tool-eyebrow">Private reporting</p>
-      <div class="report-header"><div><h1 class="report-title">Event responses</h1><p class="tool-intro">Names and all three Microsoft Forms answers are available only here.</p></div><a class="tool-link" href="/">Open TV screen →</a></div>
-      <form id="access-form" class="access-card">
-        <label for="access-code">Report access code</label>
-        <div><input id="access-code" type="password" autocomplete="current-password" required /><button type="submit">Load report</button></div>
-        <p id="report-status" role="status"></p>
-      </form>
+      <p class="tool-eyebrow">Event reporting</p>
+      <div class="report-header"><div><h1 class="report-title">Event responses</h1><p class="tool-intro">Names and all three Microsoft Forms answers are available here for the event administrator.</p></div><a class="tool-link" href="/">Open TV screen →</a></div>
+      <p id="report-status" role="status">Loading…</p>
       <div id="report-content" hidden>
         <div class="report-actions"><button id="excel-button" type="button">Download Excel</button><span id="row-count"></span></div>
-        <div class="report-card"><div class="report-scroll"><table class="report-table"><thead><tr><th>Name</th><th>Future exhibition wish</th><th>AI wish list</th><th>Event feedback</th><th>Submitted</th></tr></thead><tbody id="report-body"></tbody></table></div></div>
+        <div class="report-card"><div class="report-scroll"><table class="report-table"><thead><tr><th>Name</th><th>Future exhibition wish</th><th>AI wish list</th><th>Data &amp; AI action pledge</th><th>Submitted</th></tr></thead><tbody id="report-body"></tbody></table></div></div>
       </div>
     </section>
   </main>
+  <script src="/demo-data.js"></script>
   <script src="/xlsx.full.min.js"></script>
   <script src="/report.js"></script>
 </body>

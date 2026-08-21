@@ -1,60 +1,28 @@
-# Microsoft Forms → Power Automate → Azure setup
+# Microsoft Forms to live wall
 
-## Expected Microsoft Forms data
+Create an automated cloud flow in Power Automate:
 
-- Responder name captured by Microsoft Forms.
-- Question 4: `What would you wish to see in the future Tribe exhibitions?`
-- Question 5: `Share your AI wish list for your day to day operations.`
-- Question 6: `Please share your feedback or comments about the event`
-
-## Create the flow
-
-1. Create an **Automated cloud flow**.
-2. Add the Microsoft Forms trigger **When a new response is submitted**.
-3. Select the event Form.
-4. Add **Get response details** and select the same Form.
-5. Add the **HTTP** action.
-
-Configure the HTTP action:
-
-| Setting | Value |
-|---|---|
-| Method | `POST` |
-| URI | `https://YOUR-STATIC-APP.azurestaticapps.net/api/forms-ingest` |
-| Header `Content-Type` | `application/json` |
-| Header `x-forms-intake-secret` | Same value as Azure `FORMS_INTAKE_SECRET` |
-
-Use this JSON body and replace each placeholder with the matching dynamic
-content from Forms:
+1. Trigger: **Microsoft Forms — When a new response is submitted**.
+2. Action: **Microsoft Forms — Get response details**.
+3. Action: **HTTP**, method `POST`, URI `https://YOUR-STATIC-WEB-APP.azurestaticapps.net/api/forms-ingest`.
+4. Add header `Content-Type` with value `application/json`.
+5. Add header `x-forms-intake-secret` with the same value as the Azure `FORMS_INTAKE_SECRET` application setting.
+6. Use this JSON body and insert the corresponding dynamic Forms values:
 
 ```json
 {
-  "responseId": "<Microsoft Forms Response Id>",
-  "name": "<Responder name>",
-  "futureExhibitionWish": "<Answer to question 4>",
-  "aiWish": "<Answer to question 5>",
-  "feedback": "<Answer to question 6>"
+  "responseId": "RESPONSE_ID",
+  "name": "RESPONDER_NAME",
+  "futureExhibitionWish": "ANSWER_TO_FUTURE_EXHIBITIONS",
+  "aiWish": "ANSWER_TO_AI_WISH_LIST",
+  "feedback": "ANSWER_TO_HOW_WILL_YOU_TURN_DATA_AND_AI_INTO_ACTION"
 }
 ```
 
-The response ID prevents a retried flow from creating a duplicate row.
+Field mapping:
 
-## Add failure monitoring
+- `futureExhibitionWish`: **What would you wish to see in future Tribe exhibitions?** This is stored only in the administrator report.
+- `aiWish`: **Share your AI wish list for your day-to-day operations.** This feeds the word cloud.
+- `feedback`: **How will YOU turn Data & AI into Action?** This feeds the right-side pledge panel.
 
-1. Add a condition after the HTTP action.
-2. Treat status codes `200` and `201` as successful.
-3. For any other status, notify the event owner by the approved channel.
-4. Keep the flow run history long enough to troubleshoot the event.
-
-## Test cases
-
-Run these tests before the event:
-
-1. A normal response returns `201` and appears on screen.
-2. Re-running the same response returns `200` with `duplicate: true`.
-3. An incorrect intake secret returns `401`.
-4. Missing any required answer returns `400`.
-5. Capitalisation and punctuation variants of the same AI wish group together.
-
-Do not put the intake secret in Microsoft Forms, the static frontend or a QR
-code. It belongs only in Power Automate and Azure application settings.
+Save the flow, submit one test response, and confirm the HTTP action returns status `201` (or `200` if Power Automate resends the same response ID).

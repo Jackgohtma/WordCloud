@@ -18,14 +18,22 @@ app.http("live", {
       const phrases = [...groups.values()]
         .sort((a, b) => b.count - a.count || a.phrase.localeCompare(b.phrase))
         .slice(0, 70);
-      const messages = rows
-        .filter((row) => row.feedback)
-        .slice(0, 80)
-        .map((row) => ({ id: `${row.id}-feedback`, name: row.name, message: row.feedback, type: "COMMENT", createdAt: row.submittedAt }));
+      const visiblePledges = rows.filter((row) => row.feedback && !row.pledgeDeleted);
+      const messages = visiblePledges
+        .slice(0, 120)
+        .map((row) => ({ id: row.id, name: row.name, message: row.feedback, pinned: row.pledgePinned, createdAt: row.submittedAt }));
       return {
         status: 200,
         headers: { "Cache-Control": "no-store" },
-        jsonBody: { phrases, messages, updatedAt: new Date().toISOString() }
+        jsonBody: {
+          phrases,
+          messages,
+          stats: {
+            wishlistCount: rows.filter((row) => row.aiWish).length,
+            pledgeCount: rows.filter((row) => row.feedback).length
+          },
+          updatedAt: new Date().toISOString()
+        }
       };
     } catch (error) {
       context.error("Live feed failed", error);

@@ -5,7 +5,7 @@
   "scripts": {
     "install:api": "npm --prefix api install",
     "start": "swa start frontend --api-location api",
-    "check": "node --check frontend/app.js && node --check frontend/report.js && node --check api/src/lib/storage.js && node --check api/src/lib/security.js && node --check api/src/functions/forms-ingest.js && node --check api/src/functions/live.js && node --check api/src/functions/report.js"
+    "check": "node --check frontend/demo-data.js && node --check frontend/app.js && node --check frontend/report.js && node --check api/src/lib/storage.js && node --check api/src/lib/security.js && node --check api/src/functions/forms-ingest.js && node --check api/src/functions/live.js && node --check api/src/functions/report.js && node --check api/src/functions/manual-entry.js && node --check api/src/functions/moderate-pledge.js"
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "^2.0.2",

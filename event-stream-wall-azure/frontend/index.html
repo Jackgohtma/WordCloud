@@ -15,27 +15,46 @@
           <span class="brand-mark">T</span>
           <div><p class="brand-name">TMA TRIBE 2026</p><p class="brand-subtitle">DATA + AI = POWERING THE NEXT WAY OF WORKING</p></div>
         </div>
-        <div class="live-badge"><span></span> LIVE</div>
+        <div class="header-actions">
+          <button id="open-manual-entry" class="manual-entry-button" type="button">+ Manual entry</button>
+          <div class="live-badge"><span></span> LIVE</div>
+        </div>
       </header>
       <div class="cloud-stage" aria-label="Live AI wish cloud">
         <div class="cloud-intro">
-          <div><p class="stage-kicker">AI WISHLIST</p><h1 class="stage-title">Share your AI wish list for your day to day operations.</h1><p class="stage-guidance">See your wish already? Submit the same short phrase to support it.</p></div>
+          <div><p id="wishlist-count" class="stage-kicker">AI WISHLIST COUNTS 0</p><h1 class="stage-title">Share your AI wish list for your day to day operations.</h1><p class="stage-guidance">See your wish already? Submit the same short phrase to support it.</p></div>
           <div class="vote-legend"><strong>Bigger word = More Support</strong><small>Each matching submission is one vote</small></div>
         </div>
         <div id="phrase-cloud" class="phrase-cloud" aria-live="polite"><p class="empty-cloud">Waiting for the first idea…</p></div>
       </div>
-      <footer class="ticker"><span class="ticker-label">NEXT</span><span>ISD will review the most-supported wishes for potential future projects.</span></footer>
+      <footer class="ticker"><strong>ISD will review the most-supported wishes for potential future projects.</strong></footer>
     </section>
 
     <aside class="chat-panel">
       <header class="chat-header">
-        <div><p class="chat-eyebrow">COMMUNITY</p><h2>Please share your feedback or comments about the event</h2></div>
+        <div><p id="pledge-count" class="chat-eyebrow">PLEDGE COUNTS 0</p><h2>How will YOU turn Data &amp; AI into Action?</h2></div>
         <span id="connection-status" class="signal online">ONLINE</span>
       </header>
+      <div id="pinned-feed" class="pinned-feed" aria-label="Pinned pledges" hidden></div>
       <div id="chat-feed" class="chat-feed" aria-live="polite"><div class="empty-chat"><span>☄</span><p>The conversation starts here.</p></div></div>
-      <footer class="chat-footer">Messages from Microsoft Forms</footer>
     </aside>
   </main>
+
+  <dialog id="manual-entry-dialog">
+    <form id="manual-entry-form" class="dialog-card">
+      <div class="dialog-header">
+        <div><span>MANUAL ENTRY</span><h2>Add a response to the live wall</h2></div>
+        <button id="close-manual-entry" class="close-button" type="button" aria-label="Close">×</button>
+      </div>
+      <label>Name<input name="name" maxlength="80" required /></label>
+      <label>What would you wish to see in future Tribe exhibitions?<textarea name="futureExhibitionWish" maxlength="240" rows="2" required></textarea><small class="field-hint">Stored for the administrator report only.</small></label>
+      <label>Share your AI wish list for your day-to-day operations<textarea name="aiWish" maxlength="500" rows="2" required></textarea></label>
+      <label>How will YOU turn Data &amp; AI into Action?<textarea name="feedback" maxlength="500" rows="3" required></textarea></label>
+      <p id="manual-entry-status" class="form-status" role="status"></p>
+      <div class="dialog-actions"><button id="cancel-manual-entry" class="secondary" type="button">Cancel</button><button type="submit">Send to live wall</button></div>
+    </form>
+  </dialog>
+  <script src="/demo-data.js"></script>
   <script src="/app.js"></script>
 </body>
 </html>

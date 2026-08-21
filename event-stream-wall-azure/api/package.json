@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "main": "src/index.js",
+  "main": "src/functions/*.js",
   "engines": { "node": ">=18" },
   "scripts": {
     "start": "func start",
-    "check": "node --check src/lib/storage.js && node --check src/lib/security.js && node --check src/functions/forms-ingest.js && node --check src/functions/live.js && node --check src/functions/report.js"
+    "check": "node --check src/lib/storage.js && node --check src/lib/security.js && node --check src/functions/forms-ingest.js && node --check src/functions/live.js && node --check src/functions/report.js && node --check src/functions/manual-entry.js && node --check src/functions/moderate-pledge.js"
   },
   "dependencies": {
     "@azure/data-tables": "^13.3.1",
